@@ -35,3 +35,6 @@ class Routine(models.Model):
                           editable=False)
     name = models.CharField(max_length=100)
     exercises = models.ManyToManyField(Exercise)
+
+    def __unicode__(self):
+        return self.name
