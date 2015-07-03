@@ -9,3 +9,9 @@ class ExerciseSerializer(serializers.ModelSerializer):
         model = Exercise
         fields = ('id', 'name', 'description', 'muscle_group')
 
+
+class RoutineSerializer(serializers.ModelSerializer):
+
+    class Meta():
+        model = Routine
+        fields = ('id', 'name', 'exercises')

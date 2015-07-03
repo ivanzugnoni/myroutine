@@ -4,7 +4,7 @@ from . import views
 
 router = routers.DefaultRouter()
 router.register(r'exercises', views.ExerciseViewSet)
-
+router.register(r'routines', views.RoutineViewSet)
 
 urlpatterns = [
     url(r'^', include(router.urls)),

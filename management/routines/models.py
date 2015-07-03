@@ -29,3 +29,9 @@ class Exercise(models.Model):
         return self.name
 
 
+class Routine(models.Model):
+
+    id = models.CharField(primary_key=True, default=get_hash_id, max_length=16,
+                          editable=False)
+    name = models.CharField(max_length=100)
+    exercises = models.ManyToManyField(Exercise)
