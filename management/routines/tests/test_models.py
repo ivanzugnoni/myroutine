@@ -1,8 +1,8 @@
 from django.test import TestCase
-from routines.models import Exercise
+from routines.models import Exercise, Routine
 
 
-class TestExerciseModel(TestCase):
+class TestExercise(TestCase):
 
     def setUp(self):
         pass
@@ -18,3 +18,19 @@ class TestExerciseModel(TestCase):
         self.assertEqual(e.name, "Pecho plano")
         self.assertEqual(e.description, "Some description")
         self.assertEqual(e.muscle_group, "pecho")
+
+
+class TestRoutine(TestCase):
+
+    def setUp(self):
+        pass
+
+    def test_create_exercise(self):
+        """Should create a Routine object when given data is valid"""
+        r = Routine.objects.create(
+            name="Rutina de prueba",
+        )
+        self.assertEqual(Routine.objects.count(), 1)
+        self.assertEqual(len(r.id), 16)
+        self.assertEqual(r.name, "Rutina de prueba")
+
