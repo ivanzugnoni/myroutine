@@ -25,7 +25,7 @@ class TestRoutine(TestCase):
     def setUp(self):
         pass
 
-    def test_create_exercise(self):
+    def test_create_routine(self):
         """Should create a Routine object when given data is valid"""
         r = Routine.objects.create(
             name="Rutina de prueba",

@@ -1,7 +1,9 @@
 from routines.models import Exercise, Routine
-from .serializers import ExerciseSerializer, RoutineSerializer
+from .serializers import ExerciseSerializer, BaseRoutineSerializer, FullRoutineSerializer
 
 from rest_framework import viewsets
+from rest_framework.decorators import detail_route
+from rest_framework.response import Response
 
 
 class ExerciseViewSet(viewsets.ModelViewSet):
@@ -41,4 +43,9 @@ class RoutineViewSet(viewsets.ModelViewSet):
     """
 
     queryset = Routine.objects.all()
-    serializer_class = RoutineSerializer
+    serializer_class = BaseRoutineSerializer
+
+    def retrieve(self, request, *args, **kwargs):
+        instance = self.get_object()
+        serializer = FullRoutineSerializer(instance)
+        return Response(serializer.data)

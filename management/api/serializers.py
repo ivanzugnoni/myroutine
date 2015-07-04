@@ -11,10 +11,13 @@ class ExerciseSerializer(serializers.ModelSerializer):
 
 
 
-class RoutineSerializer(serializers.ModelSerializer):
-
-    exercises = ExerciseSerializer(many=True)
+class BaseRoutineSerializer(serializers.ModelSerializer):
 
     class Meta():
         model = Routine
         fields = ('id', 'name', 'exercises')
+
+
+class FullRoutineSerializer(BaseRoutineSerializer):
+
+    exercises = ExerciseSerializer(many=True)
