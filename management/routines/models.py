@@ -5,6 +5,10 @@ MUSCLE_GROUP_CHOICES = (
     ('pecho', 'Pecho'),
     ('espalda', 'Espalda'),
     ('biceps', 'Biceps'),
+    ('triceps', 'Triceps'),
+    ('hombros', 'Hombros'),
+    ('piernas', 'Piernas'),
+    ('abdominales', 'Abdominales'),
 )
 
 def get_hash_id():
@@ -21,7 +25,7 @@ class Exercise(models.Model):
     id = models.CharField(primary_key=True, default=get_hash_id, max_length=16,
                           editable=False)
     name = models.CharField(max_length=100)
-    description = models.CharField(max_length=300)
+    description = models.CharField(max_length=300, blank=True)
     muscle_group = models.CharField(max_length=100,
                                     choices=MUSCLE_GROUP_CHOICES)
 
