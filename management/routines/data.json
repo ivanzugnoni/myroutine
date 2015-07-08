@@ -1,0 +1,101 @@
+[
+  {
+    "fields": {
+      "muscle_group": "piernas",
+      "name": "Bicicleta",
+      "description": ""
+    },
+    "model": "routines.exercise",
+    "pk": "3cwijvmhxlr5beg6"
+  },
+  {
+    "fields": {
+      "muscle_group": "piernas",
+      "name": "Estocadas",
+      "description": ""
+    },
+    "model": "routines.exercise",
+    "pk": "4hq0d7goalj1x2yb"
+  },
+  {
+    "fields": {
+      "muscle_group": "espalda",
+      "name": "Remo bajo",
+      "description": ""
+    },
+    "model": "routines.exercise",
+    "pk": "8sfk4yue3n0q69da"
+  },
+  {
+    "fields": {
+      "muscle_group": "biceps",
+      "name": "Martillo",
+      "description": ""
+    },
+    "model": "routines.exercise",
+    "pk": "93eokal1qgy8sr2c"
+  },
+  {
+    "fields": {
+      "muscle_group": "piernas",
+      "name": "Sentadillas",
+      "description": ""
+    },
+    "model": "routines.exercise",
+    "pk": "l0s2rzxjwfnmopyk"
+  },
+  {
+    "fields": {
+      "muscle_group": "pecho",
+      "name": "Pecho plano",
+      "description": ""
+    },
+    "model": "routines.exercise",
+    "pk": "morg4db23w8peqs6"
+  },
+  {
+    "fields": {
+      "muscle_group": "espalda",
+      "name": "Remo alto",
+      "description": ""
+    },
+    "model": "routines.exercise",
+    "pk": "nsu1qjab5otfmw36"
+  },
+  {
+    "fields": {
+      "muscle_group": "triceps",
+      "name": "Militares",
+      "description": ""
+    },
+    "model": "routines.exercise",
+    "pk": "p5g3veiqjnkrzt08"
+  },
+  {
+    "fields": {
+      "muscle_group": "pecho",
+      "name": "Flexiones de brazos",
+      "description": ""
+    },
+    "model": "routines.exercise",
+    "pk": "qofydr9xm5vzhnli"
+  },
+  {
+    "fields": {
+      "muscle_group": "pecho",
+      "name": "Pecho inclinado",
+      "description": ""
+    },
+    "model": "routines.exercise",
+    "pk": "tco18jelxb0h3saz"
+  },
+  {
+    "fields": {
+      "muscle_group": "espalda",
+      "name": "Remo medio",
+      "description": ""
+    },
+    "model": "routines.exercise",
+    "pk": "x018owl4d2tcvymg"
+  }
+]
