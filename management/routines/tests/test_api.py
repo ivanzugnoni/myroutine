@@ -44,6 +44,48 @@ class TestExercise(APITestCase):
         self.assertEqual(response.data, expected)
 
 
+class TestExerciseCreate(APITestCase):
+
+    def setUp(self):
+        pass
+
+    def test_create(self):
+        """Should create exercise when POSTed payload is valid"""
+        self.assertEqual(Exercise.objects.count(), 0)
+        payload = {
+            'name': 'Pecho plano',
+            'description': 'Some description',
+            'muscle_group': 'pecho'
+        }
+        self.client.post('/api/exercises/', data=payload)
+        self.assertEqual(Exercise.objects.count(), 1)
+
+    def test_create_empty_payload(self):
+        """Should return 400 bad request when given payload is empty"""
+        response = self.client.post('/api/exercises/', data={})
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+
+class TestExerciseUpdate(APITestCase):
+
+    def setUp(self):
+        super(TestExerciseUpdate, self).setUp()
+        self.exer1 = Exercise.objects.create(
+            id='a' * 16, name="Pecho plano", description="Some description",
+            muscle_group="pecho")
+
+    def test_update(self):
+        """Should update exercise data when PUTing with valid payload"""
+        payload = {
+            'name': 'Pecho inclinado',
+            'description': "New description",
+            'muscle_group': "pecho"
+        }
+        response = self.client.put(
+                '/api/exercises/{}/'.format(self.exer1.id), data=payload)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+
 class TestRoutine(APITestCase):
 
     def setUp(self):
@@ -66,3 +108,45 @@ class TestRoutine(APITestCase):
         response = self.client.get('/api/routines/{}/'.format(self.rout1.id))
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data['id'], self.rout1.id)
+
+
+class TestRoutineCreate(APITestCase):
+
+    def setUp(self):
+        self.exer1 = Exercise.objects.create(
+            name="Pecho plano", description="Some description",
+            muscle_group='pecho'
+        )
+        self.exercises = []
+        self.exercises.append(self.exer1)
+
+    def test_create(self):
+        """Should create routine when POSTed payload is valid"""
+        self.assertEqual(Routine.objects.count(), 0)
+        payload = {
+            'name': 'Monday routine',
+        }
+        self.client.post('/api/routines/', data=payload)
+        self.assertEqual(Routine.objects.count(), 1)
+
+    def test_create_empty_payload(self):
+        """Should return 400 bad request when given payload is empty"""
+        response = self.client.post('/api/routines/', data={})
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+
+class TestRoutineUpdate(APITestCase):
+
+    def setUp(self):
+        super(TestRoutineUpdate, self).setUp()
+        self.rout1 = Routine.objects.create(
+            id='a' * 16, name="Monday routine")
+
+    def test_update(self):
+        """Should update routine data when PUTing with valid payload"""
+        payload = {
+            'name': 'Tuesday routine'
+        }
+        response = self.client.put(
+                '/api/routines/{}/'.format(self.rout1.id), data=payload)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
