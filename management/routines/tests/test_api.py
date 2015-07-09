@@ -84,6 +84,8 @@ class TestExerciseUpdate(APITestCase):
         response = self.client.put(
                 '/api/exercises/{}/'.format(self.exer1.id), data=payload)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(
+            Exercise.objects.get(id=self.exer1.id).name, payload['name'])
 
 
 class TestRoutine(APITestCase):
@@ -139,14 +141,23 @@ class TestRoutineUpdate(APITestCase):
 
     def setUp(self):
         super(TestRoutineUpdate, self).setUp()
+        self.exer1 = Exercise.objects.create(
+            name="Pecho plano", description="Some description",
+            muscle_group='pecho'
+        )
         self.rout1 = Routine.objects.create(
             id='a' * 16, name="Monday routine")
+        self.rout1.exercises.add(self.exer1)
 
     def test_update(self):
         """Should update routine data when PUTing with valid payload"""
         payload = {
-            'name': 'Tuesday routine'
+            'id': self.rout1.id,
+            'name': 'Tuesday routine',
+            'exercises': [self.exer1.id]
         }
         response = self.client.put(
                 '/api/routines/{}/'.format(self.rout1.id), data=payload)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(
+            Routine.objects.get(id=self.rout1.id).name, payload['name'])
