@@ -1,6 +1,7 @@
 from django.db import models
 import random, string
 
+
 MUSCLE_GROUP_CHOICES = (
     ('pecho', 'Pecho'),
     ('espalda', 'Espalda'),
@@ -10,6 +11,7 @@ MUSCLE_GROUP_CHOICES = (
     ('piernas', 'Piernas'),
     ('abdominales', 'Abdominales'),
 )
+
 
 def get_hash_id():
     """Generates random 16 char lowercase string with numbers and letters"""
