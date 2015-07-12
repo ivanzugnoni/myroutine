@@ -1,5 +1,7 @@
 from __future__ import division, unicode_literals, absolute_import
 
+import json
+
 from rest_framework import status
 from rest_framework.test import APITestCase
 
@@ -86,6 +88,17 @@ class TestExerciseUpdate(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(
             Exercise.objects.get(id=self.exer1.id).name, payload['name'])
+
+    def test_update_incomplete_payload(self):
+        """Should return 400 bad request when PUTing when incomplete payload"""
+        payload = {'name': 'Pecho inclinado'}
+        response = self.client.put(
+                '/api/exercises/{}/'.format(self.exer1.id), data=payload)
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        content = {
+            'muscle_group': ['This field is required.'],
+        }
+        self.assertEqual(json.loads(response.content), content)
 
 
 class TestRoutine(APITestCase):

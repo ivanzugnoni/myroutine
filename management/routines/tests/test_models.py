@@ -33,4 +33,3 @@ class TestRoutine(TestCase):
         self.assertEqual(Routine.objects.count(), 1)
         self.assertEqual(len(r.id), 16)
         self.assertEqual(r.name, "Rutina de prueba")
-
