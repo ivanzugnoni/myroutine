@@ -21,7 +21,7 @@ class TestExercise(APITestCase):
 
     def test_list(self):
         """Should return all paginated exercises"""
-        response = self.client.get('/api/exercises/')
+        response = self.client.get('/exercises/')
         expected = {
             'id': self.exer1.id,
             'name': self.exer1.name,
@@ -35,7 +35,7 @@ class TestExercise(APITestCase):
 
     def test_detail(self):
         """Should return exercise when given hash id is valid"""
-        response = self.client.get('/api/exercises/{}/'.format(self.exer1.id))
+        response = self.client.get('/exercises/{}/'.format(self.exer1.id))
         expected = {
             'id': self.exer1.id,
             'name': self.exer1.name,
@@ -59,12 +59,12 @@ class TestExerciseCreate(APITestCase):
             'description': 'Some description',
             'muscle_group': 'pecho'
         }
-        self.client.post('/api/exercises/', data=payload)
+        self.client.post('/exercises/', data=payload)
         self.assertEqual(Exercise.objects.count(), 1)
 
     def test_create_empty_payload(self):
         """Should return 400 bad request when given payload is empty"""
-        response = self.client.post('/api/exercises/', data={})
+        response = self.client.post('/exercises/', data={})
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
 
@@ -84,7 +84,7 @@ class TestExerciseUpdate(APITestCase):
             'muscle_group': "pecho"
         }
         response = self.client.put(
-                '/api/exercises/{}/'.format(self.exer1.id), data=payload)
+                '/exercises/{}/'.format(self.exer1.id), data=payload)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(
             Exercise.objects.get(id=self.exer1.id).name, payload['name'])
@@ -93,7 +93,7 @@ class TestExerciseUpdate(APITestCase):
         """Should return 400 bad request when PUTing when incomplete payload"""
         payload = {'name': 'Pecho inclinado'}
         response = self.client.put(
-                '/api/exercises/{}/'.format(self.exer1.id), data=payload)
+                '/exercises/{}/'.format(self.exer1.id), data=payload)
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         content = {
             'muscle_group': ['This field is required.'],
@@ -112,7 +112,7 @@ class TestRoutine(APITestCase):
 
     def test_list(self):
         """Should return all paginated routines"""
-        response = self.client.get('/api/routines/')
+        response = self.client.get('/routines/')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data['count'], 2)
         self.assertEqual(len(response.data['results']), 2)
@@ -120,7 +120,7 @@ class TestRoutine(APITestCase):
 
     def test_detail(self):
         """Should return routine when given hash id is valid"""
-        response = self.client.get('/api/routines/{}/'.format(self.rout1.id))
+        response = self.client.get('/routines/{}/'.format(self.rout1.id))
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data['id'], self.rout1.id)
 
@@ -141,12 +141,12 @@ class TestRoutineCreate(APITestCase):
         payload = {
             'name': 'Monday routine',
         }
-        self.client.post('/api/routines/', data=payload)
+        self.client.post('/routines/', data=payload)
         self.assertEqual(Routine.objects.count(), 1)
 
     def test_create_empty_payload(self):
         """Should return 400 bad request when given payload is empty"""
-        response = self.client.post('/api/routines/', data={})
+        response = self.client.post('/routines/', data={})
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
 
@@ -170,7 +170,7 @@ class TestRoutineUpdate(APITestCase):
             'exercises': [self.exer1.id]
         }
         response = self.client.put(
-                '/api/routines/{}/'.format(self.rout1.id), data=payload)
+                '/routines/{}/'.format(self.rout1.id), data=payload)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(
             Routine.objects.get(id=self.rout1.id).name, payload['name'])
