@@ -1,6 +1,6 @@
-from django.db import models
 import random
 import string
+from django.db import models
 
 
 MUSCLE_GROUP_CHOICES = (
